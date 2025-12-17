@@ -1,0 +1,37 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Song Recommendation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:40px; background:#f2f2f2; }
+        h1 { color:#333; }
+        .card { border:1px solid #ddd; border-radius:10px; padding:15px; margin:10px; width:220px; background:#fff; display:inline-block; vertical-align:top; }
+        .card a { text-decoration:none; color:#1a73e8; }
+        .form-section { margin-bottom:20px; }
+    </style>
+</head>
+<body>
+    <h1>🎵 AI Song Recommendation System</h1>
+    <form action="/recommend" method="post" class="form-section">
+        <label for="mode">Recommendation Mode:</label>
+        <select name="mode">
+            <option value="song">Song Name</option>
+            <option value="lyrics">Lyrics Text</option>
+        </select><br><br>
+        <textarea name="input_text" placeholder="Type song or lyrics..." rows="3" cols="50"></textarea><br><br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if results %}
+        <h2>Recommended Songs:</h2>
+        {% for item in results %}
+            <div class="card">
+                <b>{{ item.song }}</b><br>
+                <i>{{ item.artist }}</i><br>
+                <a href="{{ item.link }}" target="_blank">Listen</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
